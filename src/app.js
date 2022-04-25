@@ -64,22 +64,23 @@ const App = (App) =>
         App.fill(255,125,5);
         App.ellipse(x,y,24);
 
-        if (label == '0') 
-        {
-            x--;
-        } 
-        else if (label == '1') 
-        {
-            x++;
-        } 
-        else if (label == '3') 
-        {
-            y--;
-        } 
-        else if (label == '2') 
-        {
-            y++;
-        }
+
+            if (label == 'left') 
+            {
+                x--;
+            } 
+            else if (label == 'right') 
+            {
+                x++;
+            } 
+            else if (label == 'up') 
+            {
+                y--;
+            } 
+            else if (label == 'down') 
+            {
+                y++;
+            }
     }
 
     /**
@@ -112,14 +113,31 @@ const App = (App) =>
             }
             else
             {
-                label = result.label;
-                labelP.html(result.label);
-                console.log(result)
+                label = GetLabel(result);
+                labelP.html(GetLabel(result));
+                console.log(GetLabel(result));
                 goClassify();
             }
         });
     }
     
+    /**
+    * Returns label from confidenceByLabel propertie from the result object.
+    *
+    * @param {obj} result the results object from the models guess.
+    * @return {string} Label.
+    */
+    
+    function GetLabel(result) {
+        const entries = Object.entries(result.confidencesByLabel);
+        let greatestConfidence = entries[0];
+        for(let i = 0; i < entries.length; i++) {
+          if(entries[i][1] > greatestConfidence[1]) {
+            greatestConfidence = entries[i];
+          }
+        }
+        return greatestConfidence[0];
+      }
 
     /**
     * Callback for when the model is loaded.

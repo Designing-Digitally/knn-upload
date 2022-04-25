@@ -42,7 +42,7 @@ module.exports = {
         new CopyWebpackPlugin(
         {
             patterns: [
-                {from: './src/json',to: './dist'}
+                {from: './src/json',to: 'json'}
             ]
         })
     ]
