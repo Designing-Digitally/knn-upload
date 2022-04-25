@@ -24,16 +24,18 @@
     "p5": "^1.4.1"
   },
   "devDependencies": {
-    "webpack": "^5.71.0",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.8.1",
     "@babel/core": "^7.17.9",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/preset-env": "^7.16.11",
     "babel-loader": "^8.2.4",
+    "copy-webpack-plugin": "^10.2.4",
     "eslint": "^8.13.0",
+    "fs-extra": "^10.1.0",
+    "html-webpack-plugin": "^5.5.0",
     "underscore": "^1.13.2",
-    "fs-extra": "^10.1.0"
+    "webpack": "^5.71.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.8.1"
   },
   "bugs": {
     "url": "https://github.com/Designing-Digitally/knn-upload/issues"

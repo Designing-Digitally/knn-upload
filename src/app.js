@@ -14,7 +14,7 @@ let btnHeight = 11;
 const canvasDimensions = {width: 720, height: 405}
 
 //Button Declaration
-let saveButton;
+let loadButton;
 
 const App = (App) => 
 {
@@ -52,32 +52,31 @@ const App = (App) =>
     
     App.draw = () =>
     {
+        // FLIPPING VIDEO CAPTURE
+        App.push();
+        App.translate(canvasDimensions.width,0);
+        App.scale(-1,1);
+        App.image(video, 0, 0, canvasDimensions.width, canvasDimensions.height);
+        App.pop();
+
         //FOR ELLISE DRAW
-        App.background(0);
-        App.fill(255);
+        //App.background(0);
+        App.fill(255,125,5);
         App.ellipse(x,y,24);
 
-         // FLIPPING VIDEO CAPTURE
-         App.push();
-         App.translate(canvasDimensions.width,0);
-         App.scale(-1,1);
-         App.image(video, 0, 0, canvasDimensions.width, canvasDimensions.height);
-         App.pop();
-
-
-        if (label == 'left') 
+        if (label == '0') 
         {
             x--;
         } 
-        else if (label == 'right') 
+        else if (label == '1') 
         {
             x++;
         } 
-        else if (label == 'up') 
+        else if (label == '3') 
         {
             y--;
         } 
-        else if (label == 'down') 
+        else if (label == '2') 
         {
             y++;
         }
@@ -90,7 +89,8 @@ const App = (App) =>
     function LoadModel()
     {
         knn = ml5.KNNClassifier();
-        knn.load('json/knn_data.json', () => 
+        labelP.html('Loading KNN Data...');
+        knn.load('./json/knn-data.json', () => 
         {
             goClassify();
         });
@@ -114,6 +114,7 @@ const App = (App) =>
             {
                 label = result.label;
                 labelP.html(result.label);
+                console.log(result)
                 goClassify();
             }
         });
